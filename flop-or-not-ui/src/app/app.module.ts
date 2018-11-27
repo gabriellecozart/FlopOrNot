@@ -7,18 +7,39 @@ import { PredictionInputFormComponent } from './prediction-input-form/prediction
 import { PredictionResultsComponent } from './prediction-results/prediction-results.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'prediction',
+    component: PredictionInputFormComponent
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent
+  },
+  { path: '',
+    redirectTo: '/welcome',
+    pathMatch: 'full'
+  }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     PredictionInputFormComponent,
-    PredictionResultsComponent
+    PredictionResultsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
